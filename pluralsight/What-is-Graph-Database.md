@@ -2,7 +2,7 @@
 
 In your roll, you may have come across relational database models like this one:
 
-![Complex ERD Diagram](./assets/chapter-01/complex-erd.png)
+![Complex ERD Diagram](./assets/chapter_01/complex-erd.png)
 
 Sure, querying one entity is easy enough, but what if you want all the details of an entity? You'd probably have to write a query that is long, and more important, very slow. And that's because relations are not first-class citizens in a relational database.
 
@@ -12,11 +12,11 @@ Graph databases are very mind friendly compared to other data storage technologi
 
 A graph consists of nodes which are connected by directional relationships. A node represents an entity. An entity is typically an abstraction of something in the real world, like an animal, a plant, a customer, etc.
 
-![What is a graph](./assets/chapter-01/what-is-a-graph.png)
+![What is a graph](./assets/chapter_01/what-is-a-graph.png)
 
 For example, imagine a graph representing Twitter users. John and Peter are the nodes in the graph representing the users. And the relationship between the two has the name *follows* that goes from John to Peter. So we read the graph as "John follows Peter". Others nodes can be added to the graph, representing other users, which can lead to more relationships. A collection of nodes and relationships together is called a graph. We can also extend the graph with other types of nodes and relationships.
 
-![Graph example](./assets/chapter-01/graph-example.png)
+![Graph example](./assets/chapter_01/graph-example.png)
 
 Here Joanna has the *writes* relationship to a tweet, which results in the *to* relationship from the tweet to Nick, and the last relationship between Joanna and Nick.
 
@@ -30,7 +30,7 @@ The graph databases products are very flexible because they don't use a fixed ke
 
 All graph databases support one or more query languages to retrieve and store data, and they all implement the property graph model. A graph model contains nodes and relationships. In a graph database, nodes and relationships can also contain properties. In that way a node representing Joanna has a property called *name* with a certain value, could have the additional property *age* with a certain value, and so on. So that relationships can also contain properties. On a property graph model a relationship is named and directed between exactly two nodes, the start and end node.
 
-![Graph Database](./assets/chapter-01/graph-model-example.png)
+![Graph Database](./assets/chapter_01/graph-model-example.png)
 
 ## Why a graph database?
 
@@ -64,7 +64,7 @@ Now that you know when to use a graph database, here are some advantages of usin
 
 Creating foreign keys in relational databases is fine, but relational databases are not very good at retrieving nested data. Let's take the following example:
 
-![Relational Nested Schema](./assets/chapter-01/relational-nested-schema.png)
+![Relational Nested Schema](./assets/chapter_01/relational-nested-schema.png)
 
 We need several complicated and costly joins just to find out what products a customer bought. But it gets even more complex if you want to ask the database which customers bought a certain product, and to find out which customers bought this product who also bought that product, like Amazon does for example, is very difficult and will take the database too long.
 
@@ -72,7 +72,7 @@ Graph databases don't have this problem because its main purpose is relationship
 
 Now in the following table, Depth 2 represents the timescale to find all friends of a user's friends. Depth 3 represents the timescale to find all friends of the friends of the user's friends. And so on. The larger the depth, the more the time it takes to find friends of friends. The values are presented in seconds.
 
-![Timescale to find friends](./assets/chapter-01/timescale-to-find-friends.png)
+![Timescale to find friends](./assets/chapter_01/timescale-to-find-friends.png)
 
 It turns out that at Depth 2, the waiting times for both MySQL and Neo4j are acceptable. But for Depth 3 the relational database becomes unusable for an online system, and at level 5 they had to break the MySQL off because it just took too long, when Neo4j produced the results in just over 2 seconds.
 
@@ -82,7 +82,7 @@ This doesn't prove that a relational database is worthless, it's just not suitab
 
 For document databases, let's start with an example of a document.
 
-![Document Example](./assets/chapter-01/document-example.png)
+![Document Example](./assets/chapter_01/document-example.png)
 
 This is the data from the previous example in a document. We see that everything there is to know about a customer is now presented in one document. Documents are stored in document stores, in this case the customer document store.
 
@@ -94,7 +94,7 @@ If this is an advantage or a disadvantage depends. If this is not desirable, for
 
 Let's imagine that we have two customer documents in the store.
 
-![Document query example](./assets/chapter-01/many-documents-example.png)
+![Document query example](./assets/chapter_01/many-documents-example.png)
 
 You can imagine it's probably easy to construct a query that retrieves a customer and see what the customer bought, but it's getting more difficult if you want to get all customers that bought a certain product, or get all products a customer bought besides the candle.
 
@@ -121,17 +121,17 @@ In terms of queries, when a document is fetched, it already contains all related
 
 Let's look at some examples of graph databases.
 
-![Social graph database](./assets/chapter-01/social-graph-database.png)
+![Social graph database](./assets/chapter_01/social-graph-database.png)
 
 Here is a part of a social graph database. There are three different kinds of entities. In the top layer are companies, on the middle are people, and on the bottom layer are interest. The red relationships (from middle to top) have the name *Works_For*. The black ones (from middle to bottom) have the name *Skilled_At*.
 
 Let's say that a company that has these graphs is interested in matching people with particular skills. An interesting query would be one that answers the following question: Who shares Cathy's skills? Show the names with the number of skill matches. Remember that relationships can contain properties, so we could store a 1 to 10 score in the *Skilled_At* relationship, and show the total score in the result set. Or another question could be interesting: Who works in the same company as Cathy and shares the most skills. Or we could connect the people with a new relationship called *Knows*, and look for people in other companies that know people of a given company which have a particular skill set. Such queries would be fairly easy to construct and fast to execute.
 
-![Security graph database](./assets/chapter-01/security-graph-database.png)
+![Security graph database](./assets/chapter_01/security-graph-database.png)
 
 Here's a simplified example of a security database, the top layer consists of nodes representing rights. These are bundled in the second layer, which have the security groups. The relationships between the groups and the rights are called *Contains*. People are on the third layer and can be in one or more groups by the relationships *As_Group*. It can also be connected to individual rights by the *right_granted* or *right_denied* relationship. With a well-crafted simple query, graph databases are able to quickly compose a list of all rights an individual has, and it's equally simple to determine who has a certain right. Let's say this model is used in an application for blog posts. We could easily extend the model to include the blog post as nodes and create relationships like *inserted* between persons and posts. This could also contain the *date* as a property. In that way, it's child play to determine who did what with a blog post.
 
-![Logistics graph database](./assets/chapter01/logistics-graph-database.png.png)
+![Logistics graph database](./assets/chapter_01/logistics-graph-database.png)
 
 The final example is about logistics. Here is a part of the underground London map, which is a typical example of a graph. Stations are nodes with connections in between, which are relationships. The relationships could contain a travel time. With a query, is possible to calculate the shortest routes between one station to the other, or determine a route based on other criteria, for example, you might want to include a snack bar on the route.
 
